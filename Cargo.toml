@@ -1,0 +1,14 @@
+[package]
+name = "confer-rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.68"
+dotenv = "0.15.0"
+ethers = "1.0.2"
+rust_decimal = { version = "1.27.0", features = ["db-postgres", "db-tokio-postgres"] }
+tokio = { version = "1.23.0", features = ["macros"] }
+tokio-postgres = "0.7.7"
