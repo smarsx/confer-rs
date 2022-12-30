@@ -27,7 +27,7 @@ async fn main() -> anyhow::Result<()> {
         .map(|m| {
             let addr = H160::from_str(m.as_str());
             match addr {
-                Ok(a) => return to_checksum(&a, Some(1)), // filter may auto checksum addresses.
+                Ok(a) => return to_checksum(&a, Some(1)), // filter may auto checksum addresses?
                 Err(_) => m.to_owned()
             }
         })
