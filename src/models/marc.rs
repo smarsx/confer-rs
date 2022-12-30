@@ -1,5 +1,4 @@
-use tokio_postgres::{Client, Row};
-use anyhow::Error;
+use tokio_postgres::Row;
 
 pub struct Marc {
     pub name: String,
@@ -8,22 +7,11 @@ pub struct Marc {
 }
 
 impl Marc {
-
     pub fn from_row(row: &Row) -> Self {
         Self {
             name: row.get("name"),
             address: row.get("address"),
             status: row.get("status"),
         }
-    }
-
-    pub async fn get_open(client: &Client) -> Result<Vec<Marc>, Error> {
-        let rows: Vec<Row> = client.query("SELECT name, address, status FROM Marc WHERE status = 1", &[]).await?;
-        
-        let res: Vec<Marc> = rows.iter()
-            .map(|m| Marc::from_row(m))
-            .collect();
-
-        Ok(res)
     }
 }
