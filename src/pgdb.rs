@@ -1,4 +1,4 @@
-use ethers::types::{H256};
+use ethers::types::H256;
 use rust_decimal::prelude::*;
 use tokio_postgres::{Client, NoTls};
 use anyhow::{Result, Error};
