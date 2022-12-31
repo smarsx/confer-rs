@@ -22,6 +22,16 @@ impl PgDB {
             client
         })
     }
+    
+    pub async fn get_last_transaction_hash(&mut self) -> Result<String, Error> {
+        let rows = self.client.query("SELECT hash FROM Confirmed WHERE id = (SELECT MAX(id) FROM Confirmed)", &[]).await?;
+        if let Some(row) = rows.get(0) {
+            let hash: String = row.get(0);
+            Ok(hash)
+        } else {
+            Ok(String::from("0"))
+        }
+    }
 
     pub async fn get_marcs(&mut self) -> Result<Vec<Marc>, Error> {
         let rows = self.client.query("SELECT name, address, status FROM Marc WHERE status = 1", &[]).await?;
